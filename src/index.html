@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta name="X-UA-Compatible" , http-equiv="IE-Edge" />
+    <meta name="viewport" , content="width=device-width initial-scale=1.0" />
+    <title>Slide show</title>
+    <link rel="stylesheet" media="screen" type="text/css" href="main.css" />
+</head>
+<script src="/lib/modernizr-custom.js"></script>
+
+<body>
+    <button id="add-pic-fol-button">Add picture / folder</button>
+
+    <main>
+        <section id="main-container">
+            <section id="how-to-use">
+                <p>Watch the video below to know how to use this slideshow app.</p>
+
+                <video poster="/imgs/Image106-medium.jpg" controls width="100%" height="auto">
+                    <!--
+                        Type attribute important for performance reasons, especially on mobile.
+                        Check mobile browser developer tools for more info with and without type 
+                        attribute.
+                    -->
+                    <source src="/videos/Laptop Battery Myths (Official Dell Tech Support).mp4" type="video/mp4" />
+                    <track src="chrome-subtitles-en.vtt" label="English captions"
+                    kind="captions" srclang="en" default/>
+                    <p>Browser does not support video.</p>
+                </video>
+                <button onclick="toggleFullScreen()">Cinematic mode</button>
+
+            </section>
+
+            <section>
+                <button id="previous-button"></button>
+                <section id="slide-show-container">
+                    <!--
+                        <img id="first-image" srcset="/imgs/Image106.jpg 1600w, /imgs/Image103.jpg 1000w, /imgs/Image104.jpg 800w, /imgs/Image107.jpg 500w" sizes="(max-width: 768px) 90vw, 50vw" alt="first slideshow image"/>
+                        <img style="display: none" id="next-image" srcset="/imgs/Image106.jpg 1600w, /imgs/Image103.jpg 1000w, /imgs/Image104.jpg 800w, /imgs/Image107.jpg 500w" sizes="50vw" alt="second slideshow image"/>
+                    -->
+                    <picture>
+                        <!--A 1x img should be specified if present-->
+                        <!--
+                            This is better because we are able to specify the media queries for
+                            each of the image sources and let the browser decide which image to display
+                        -->
+                        <source media="(min-width: 768px)" , srcset="/imgs/Image106.jpg 2x
+                            /imgs/Image106-medium.jpg" />
+                        <source media="(min-width: 600px)" srcset="/imgs/Image103.jpg" />
+
+                        <!--If the brower doesn't support the picture element.-->
+                        <img src="/imgs/Image107.jpg" alt="flower" />
+                    </picture>
+                </section>
+
+                <button id="next-button"></button>
+            </section>
+        </section>
+
+        <button id="delete-img">Delete Image</button>
+
+        <section id="effect-section">
+            <h1>Effect:</h1>
+
+            <select>
+                <option>Fade in</option>
+                <option>Fade out</option>
+                <option>Star wipe</option>
+                <option>Window wipe (not sure)</option>
+            </select>
+        </section>
+    </main>
+
+    <script src="main.js" type="text/javascript"></script>
+</body>
+
+</html>

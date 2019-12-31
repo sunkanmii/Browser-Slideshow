@@ -1,0 +1,67 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+header,
+section,
+footer,
+aside,
+nav,
+main,
+article,
+figure {
+    display: block;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.no-flexbox #main-container {
+    overflow: auto;
+    width: 100%;
+    height: 400px;
+}
+
+.flexbox #main-container {
+    /**
+    display: grid;
+    grid-template-columns: 40px 30px 40px;
+    margin: 1.5rem 0;
+    grid-template-rows: 1fr;
+    grid-column-gap: 1rem;
+    **/
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 400px;
+}
+
+.flexbox #main-container #section-show-container{
+    width: 40%;
+}
+
+img{
+    max-width: 100%;
+}
+
+picture#first-image{
+    transition: width 0.5s;
+    max-width: 50vw;
+}
+
+@media screen and (max-width: 48rem){
+    picture#first-image{
+        max-width: 90vw; /**same as 90%**/
+        width: 90vw;
+    }    
+}
