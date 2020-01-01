@@ -4,13 +4,14 @@
 <head>
     <meta name="X-UA-Compatible" , http-equiv="IE-Edge" />
     <meta name="viewport" , content="width=device-width initial-scale=1.0" />
+    <meta name="msapplication-tap-highlight" content="none"/>
     <title>Slide show</title>
     <link rel="stylesheet" media="screen" type="text/css" href="main.css" />
 </head>
 <script src="/lib/modernizr-custom.js"></script>
 
 <body>
-    <button id="add-pic-fol-button">Add picture / folder</button>
+    <button id="add-pics">Add picture / folder</button>
 
     <main>
         <section id="main-container">
@@ -23,17 +24,20 @@
                         Check mobile browser developer tools for more info with and without type 
                         attribute.
                     -->
-                    <source src="/videos/Laptop Battery Myths (Official Dell Tech Support).mp4" type="video/mp4" />
-                    <track src="chrome-subtitles-en.vtt" label="English captions"
-                    kind="captions" srclang="en" default/>
+                    <source src="/videos/Laptop Battery Myths (Official Dell Tech Support).mp4" type="video/mp4"/>
+                   
+                    <track src="/chrome-subtitles-en.vtt" label="English captions" kind="captions" srclang="en" default/>
+                    
                     <p>Browser does not support video.</p>
                 </video>
-                <button onclick="toggleFullScreen()">Cinematic mode</button>
-
+                <section class="cus-video-controls">
+                    <button onclick="toggleFullScreen()" id="cinematic-mode">Cinematic mode</button>
+                </section>
             </section>
 
-            <section>
+            <section class="slide-show-main">
                 <button id="previous-button"></button>
+                
                 <section id="slide-show-container">
                     <!--
                         <img id="first-image" srcset="/imgs/Image106.jpg 1600w, /imgs/Image103.jpg 1000w, /imgs/Image104.jpg 800w, /imgs/Image107.jpg 500w" sizes="(max-width: 768px) 90vw, 50vw" alt="first slideshow image"/>
@@ -56,6 +60,7 @@
 
                 <button id="next-button"></button>
             </section>
+
         </section>
 
         <button id="delete-img">Delete Image</button>
