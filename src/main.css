@@ -22,7 +22,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#add-pics{
+#add-pics {
     background-color: darkblue;
     -webkit-tap-highlight-color: transparent;
     background-image: none;
@@ -30,19 +30,24 @@ body {
         Don't use user-select: none; unless it's imperative
     **/
 }
-#add-pics:hover{
+
+#add-pics:hover {
     background-color: rgb(30, 30, 211);
 }
-#add-pics::moz-focus-inner{
+
+#add-pics::moz-focus-inner {
     border: 0;
 }
-#add-pics:focus{
+
+#add-pics:focus {
     outline: 0;
     background-color: rgb(104, 104, 233);
 }
-#add-pics:active{
+
+#add-pics:active {
     background-color: darkblue;
 }
+
 .no-flexbox #main-container {
     overflow: auto;
     width: 100%;
@@ -75,6 +80,26 @@ img {
     max-width: 100%;
 }
 
+.slide-show-main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: nowrap;
+}
+.slide-show-main > section{
+    width: 10%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+}
+
+.slide-show-main #previous-button{
+    justify-content: flex-end;
+}
+
 picture#first-image {
     transition: width 0.5s;
     max-width: 50vw;
@@ -82,7 +107,7 @@ picture#first-image {
 
 @media screen and (min-width: 48rem) {
     img {
-        width: 80%;
+        width: 100%;
     }
 
     #how-to-use {
@@ -93,7 +118,7 @@ picture#first-image {
         flex-wrap: wrap;
     }
 
-    #how-to-use p {
+    #how-to-use h1 {
         width: 100%;
     }
 
@@ -102,13 +127,20 @@ picture#first-image {
         height: auto;
     }
 
+    .slide-show-main {
+        width: 80%;
+    }
+
     #how-to-use .cus-video-controls {
         width: 100%;
     }
-
-    picture#first-image {
-        max-width: 90vw;
-        /**same as 90%**/
-        width: 90vw;
+}
+/**
+75rem = 1200px
+**/
+@media screen and (min-width: 75rem){
+    
+    .slide-show-main {
+        width: 60%;
     }
 }

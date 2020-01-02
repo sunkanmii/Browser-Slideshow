@@ -11,12 +11,14 @@
 <script src="/lib/modernizr-custom.js"></script>
 
 <body>
-    <button id="add-pics">Add picture / folder</button>
+    <header>    
+        <button id="add-pics">Add picture / folder</button>
+    </header>
 
     <main>
         <section id="main-container">
             <section id="how-to-use">
-                <p>Watch the video below to know how to use this slideshow app.</p>
+                <h1>Watch the video below to know how to use this slideshow app.</h1>
 
                 <video poster="/imgs/Image106-medium.jpg" controls width="100%" height="auto">
                     <!--
@@ -36,9 +38,9 @@
             </section>
 
             <section class="slide-show-main">
-                <button id="previous-button"></button>
-                
-                <section id="slide-show-container">
+                <section id="previous-button">
+                    <button></button>
+                </section>
                     <!--
                         <img id="first-image" srcset="/imgs/Image106.jpg 1600w, /imgs/Image103.jpg 1000w, /imgs/Image104.jpg 800w, /imgs/Image107.jpg 500w" sizes="(max-width: 768px) 90vw, 50vw" alt="first slideshow image"/>
                         <img style="display: none" id="next-image" srcset="/imgs/Image106.jpg 1600w, /imgs/Image103.jpg 1000w, /imgs/Image104.jpg 800w, /imgs/Image107.jpg 500w" sizes="50vw" alt="second slideshow image"/>
@@ -56,9 +58,10 @@
                         <!--If the brower doesn't support the picture element.-->
                         <img src="/imgs/Image107.jpg" alt="flower" />
                     </picture>
-                </section>
 
-                <button id="next-button"></button>
+                <section id="next-button">
+                    <button></button>
+                </section>
             </section>
 
         </section>
@@ -66,7 +69,7 @@
         <button id="delete-img">Delete Image</button>
 
         <section id="effect-section">
-            <h1>Effect:</h1>
+            <p>Effect:</p>
 
             <select>
                 <option>Fade in</option>
