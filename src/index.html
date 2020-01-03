@@ -11,8 +11,10 @@
 <script src="/lib/modernizr-custom.js"></script>
 
 <body>
-    <header>    
-        <button id="add-pics">Add picture / folder</button>
+    <header>
+        <input type="file" id="fileElem" accept="image/*" style="display:none" onchange="AddImgFiles(this.files)">
+        <button id="add-pics">Select some files</button>
+        <img src="" alt="user-file"/>
     </header>
 
     <main>
@@ -32,6 +34,7 @@
                     
                     <p>Browser does not support video.</p>
                 </video>
+                
                 <section class="cus-video-controls">
                     <button onclick="toggleFullScreen()" id="cinematic-mode">Cinematic mode</button>
                 </section>

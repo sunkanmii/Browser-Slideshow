@@ -1,6 +1,26 @@
 const addPicButton = document.querySelector("#add-pics");
+const fileElem = document.querySelector("#fileElem");
 const fullScreenCusParent = document.querySelector("#how-to-use video");
+const img = document.querySelector("header img");
+const pics = [];
 
+addPicButton.addEventListener("click", () => {
+    fileElem.click();
+})
+
+function AddImgFiles(files) {
+    for (obj in files) {
+        console.log(obj);
+        let allfiles = files[obj];
+
+        let reader = new FileReader();
+        reader.onload = function (event) {
+            img.src = event.target.result;
+        }
+
+        reader.readAsDataURL(allfiles);
+    }
+}
 // if(window.PointerEvent){
 //     addPicButton.addEventListener("pointerdown", this.handleGestureStart, true);
 //     addPicButton.addEventListener("pointermove", this.handleGestureMove, true);
@@ -57,19 +77,19 @@ const fullScreenCusParent = document.querySelector("#how-to-use video");
 //     if(!rafPending) {
 //       return;
 //     }
-  
+
 //     var differenceInX = initialTouchPos.x - lastTouchPos.x;
-  
+
 //     var newXTransform = (currentXPosition - differenceInX)+'px';
 //     var transformStyle = 'translateX('+newXTransform+')';
 //     addPicButton.style.webkitTransform = transformStyle;
 //     addPicButton.style.MozTransform = transformStyle;
 //     addPicButton.style.msTransform = transformStyle;
 //     addPicButton.style.transform = transformStyle;
-  
+
 //     rafPending = false;
 //   }
 
-function toggleFullScreen(){
+function toggleFullScreen() {
     document.body.requestFullscreen();
 }
