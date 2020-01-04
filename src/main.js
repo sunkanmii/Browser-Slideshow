@@ -2,6 +2,12 @@ const addPicButton = document.querySelector("#add-pics");
 const fileElem = document.querySelector("#fileElem");
 const fullScreenCusParent = document.querySelector("#how-to-use video");
 const img = document.querySelector("header img");
+const slideShowPic = document.querySelector(".slide-show-main picture source");
+const videoElem = document.querySelector("#main-container video");
+const error_message = document.querySelector(".slide-show-main picture + p")
+if(videoElem.canPlayType("video/mp4; codecs=avc1.42E01E, mp4a.40.2")){
+    console.log("Video element of type mp4 is supported.");
+}
 const pics = [];
 
 addPicButton.addEventListener("click", () => {
@@ -9,13 +15,14 @@ addPicButton.addEventListener("click", () => {
 })
 
 function AddImgFiles(files) {
-    for (obj in files) {
-        console.log(obj);
-        let allfiles = files[obj];
+    for (let i = 0; i < files.length; i++) {
+        let allfiles = files[i];
 
         let reader = new FileReader();
+        
         reader.onload = function (event) {
             img.src = event.target.result;
+            pics.push(event.target.result);
         }
 
         reader.readAsDataURL(allfiles);
@@ -90,6 +97,30 @@ function AddImgFiles(files) {
 //     rafPending = false;
 //   }
 
-function toggleFullScreen() {
-    document.body.requestFullscreen();
+function PreviousImage(){
+    if(slideShowPic.srcset === pics[0]){
+        error_message.textContent = "This is the first image!";
+        error_message.setAttribute("aria-live", "polite");
+    }
+    else if(slideShowPic.srcset === pics[pics.length - 1]){
+        error_message.textContent = "This is the last image!";
+        error_message.setAttribute("aria-live", "polite");
+    }
+}
+
+function NextImage(){
+    if(slideShowPic.srcset === pics[0]){
+        error_message.textContent = "This is the first image!";
+        error_message.setAttribute("aria-live", "polite");
+    }
+    else if(slideShowPic.srcset === pics[pics.length - 1]){
+        error_message.textContent = "This is the last image!";
+        error_message.setAttribute("aria-live", "polite");
+    }
+}
+
+function ToggleFullScreen() {
+    if(videoElem.canPlayType("video/mp4; codecs=avc1.42E01E, mp4a.40.2")){
+        videoElem.requestFullscreen();
+    }
 }
