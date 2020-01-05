@@ -2,6 +2,8 @@ const addPicButton = document.querySelector("#add-pics");
 const fileElem = document.querySelector("#fileElem");
 const fullScreenCusParent = document.querySelector("#how-to-use video");
 const img = document.querySelector("header img");
+const prevButton = document.querySelector("#previous-button");
+const slideShowMain = document.querySelector(".slide-show-main");
 const slideShowPic = document.querySelector(".slide-show-main picture source");
 const videoElem = document.querySelector("#main-container video");
 const error_message = document.querySelector(".slide-show-main picture + p")
@@ -16,18 +18,22 @@ addPicButton.addEventListener("click", () => {
 
 function AddImgFiles(files) {
     for (let i = 0; i < files.length; i++) {
-        let allfiles = files[i];
+        let cusfile = files[i];
 
         let reader = new FileReader();
         
-        reader.onload = function (event) {
-            img.src = event.target.result;
-            pics.push(event.target.result);
-        }
+        reader.addEventListener("load", function (event) {
+            if(i == 0){
+                slideShowPic.srcset = event.target.result;
+            }
+            
+            slideShowMain.innerHTML += "<img src ='" + event.target.result + "'/>"; 
+        });
 
-        reader.readAsDataURL(allfiles);
+        reader.readAsDataURL(cusfile);
     }
 }
+
 // if(window.PointerEvent){
 //     addPicButton.addEventListener("pointerdown", this.handleGestureStart, true);
 //     addPicButton.addEventListener("pointermove", this.handleGestureMove, true);
@@ -106,6 +112,14 @@ function PreviousImage(){
         error_message.textContent = "This is the last image!";
         error_message.setAttribute("aria-live", "polite");
     }
+    else{
+        console.table(pics);
+        console.log(pics[pics.indexOf(slideShowPic.srcset) - 1]);
+        
+        const imgUrl = URL.createObjectURL(pics[pics.indexOf(slideShowPic.srcset) - 1]);
+
+        slideShowPic.srcset = imgUrl;
+    }
 }
 
 function NextImage(){
@@ -116,6 +130,10 @@ function NextImage(){
     else if(slideShowPic.srcset === pics[pics.length - 1]){
         error_message.textContent = "This is the last image!";
         error_message.setAttribute("aria-live", "polite");
+    }
+    else{
+        window.
+        slideShowPic.srcset = pics[pics.indexOf(slideShowPic.srcset) + 1];
     }
 }
 
