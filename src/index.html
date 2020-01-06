@@ -50,26 +50,19 @@
                     <img id="first-image" srcset="/imgs/Image106.jpg 1600w, /imgs/Image103.jpg 1000w, /imgs/Image104.jpg 800w, /imgs/Image107.jpg 500w" sizes="(max-width: 768px) 90vw, 50vw" alt="first slideshow image"/>
                     <img style="display: none" id="next-image" srcset="/imgs/Image106.jpg 1600w, /imgs/Image103.jpg 1000w, /imgs/Image104.jpg 800w, /imgs/Image107.jpg 500w" sizes="50vw" alt="second slideshow image"/>
                 -->
-                <picture>
-                    <!--A 1x img should be specified if present-->
-                    <!--
-                            This is better because we are able to specify the media queries for
-                            each of the image sources and let the browser decide which image to display
-                        -->
-                    <source srcset="/imgs/Image106.jpg" />
-
-                    <!--If the brower doesn't support the picture element.-->
-                    <img src="/imgs/Image107.jpg" alt="flower" />
-                </picture>
-                <p id="error-message" aria-hidden="true"></p>
-
+                   
+                <!--If the brower doesn't support the picture element.-->
+                <img class="user-images" src="/imgs/Image107.jpg" sizes="50vw" alt="flower"/>
+                
                 <section id="next-button">
                     <button onclick="NextImage()"></button>
                 </section>
             </section>
-
+            
         </section>
 
+        <p id="error-message" aria-hidden="true"></p>
+        
         <button id="delete-img">Delete Image</button>
 
         <section id="effect-section">
