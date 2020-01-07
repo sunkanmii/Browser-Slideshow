@@ -47,7 +47,12 @@ addPicButton.addEventListener("click", () => {
 })
 
 function AddImgFiles(files) {
-    
+    let userImgs = GetUserImages().UserImages();
+    let userImageParent = userImgs[0].parentNode;
+
+    if(userImgs[0].alt === "flower"){
+        userImageParent.removeChild(userImageParent.children[1]);
+    }
     for (let i = 0; i < files.length; i++) {
         let cusfile = files[i];
         
@@ -140,22 +145,16 @@ function PreviousImage(){
     let currImgInd = myCounter.CusCounter();
     let prevImgInd = myCounter.DecCounter();
     
-    if(prevImgInd < 0){
-        myCounter.IncrCounter();
-        prevImgInd = 0;
-    }
-
-    if(userImgs[prevImgInd] === userImgs[0]){
-        errorMessage.textContent = "This is the first image!";
-        errorMessage.setAttribute("aria-live", "polite");
-    }
-    else if(userImgs[prevImgInd] === userImgs[userImgs.length - 1]){
-        errorMessage.textContent = "This is the last image!";
-        errorMessage.setAttribute("aria-live", "polite");
+    
+    
+    if(userImgs[currImgInd] !== userImgs[0]){
+        userImgs[currImgInd].setAttribute("hidden", "true");
+        userImgs[prevImgInd].removeAttribute("hidden");
     }
     else{
-        userImgs[currImgInd].setAttribute("hidden", true);
-        userImgs[prevImgInd].removeAttribute(hidden);
+        prevImgInd = myCounter.IncrCounter();
+        errorMessage.textContent = "This is the first image!";
+        errorMessage.setAttribute("aria-live", "polite");
     }
 }
 
@@ -164,17 +163,14 @@ function NextImage(){
     let currImgInd = myCounter.CusCounter();
     let nextImgInd = myCounter.IncrCounter();
     
-    if(userImgs[nextImgInd] === userImgs[0]){
-        errorMessage.textContent = "This is the first image!";
-        errorMessage.setAttribute("aria-live", "polite");
-    }
-    else if(userImgs[nextImgInd] === userImgs[userImgs.length - 1]){
-        errorMessage.textContent = "This is the last image!";
-        errorMessage.setAttribute("aria-live", "polite");
+    if(userImgs[currImgInd] !== userImgs[userImgs.length - 1]){
+        userImgs[currImgInd].setAttribute("hidden", "true");
+        userImgs[nextImgInd].removeAttribute("hidden");
     }
     else{
-        userImgs[currImgInd].setAttribute("hidden", true);
-        userImgs[nextImgInd].removeAttribute(hidden);
+        nextImgInd = myCounter.DecCounter();
+        errorMessage.textContent = "This is the last image!";
+        errorMessage.setAttribute("aria-live", "polite");
     }
 }
 
