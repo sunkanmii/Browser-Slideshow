@@ -17,11 +17,23 @@ article,
 figure {
     display: block;
 }
+.opaque {
+    /* Theoretically for IE 8 & 9 (more valid) */
+    /* ...but not required as filter works too */
+    /* should come BEFORE filter */
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* IE8 */
+  
+    /* This works in IE 8 & 9 too */
+    /* ... but also 5, 6, 7 */
+    filter: alpha(opacity=50); /* IE 5-7 */
+    /* Modern Browsers */
+    
+    opacity: 0.5;
+}
 
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
-
 #add-pics {
     background-color: darkblue;
     -webkit-tap-highlight-color: transparent;
@@ -103,6 +115,56 @@ img {
 picture#first-image {
     transition: width 0.5s;
     max-width: 50vw;
+}
+
+@keyframes fade-in-left{
+    0%{
+        position: relative;
+        opacity: 0;
+        right: 20rem;
+    }
+    50%{
+        right: 10rem;
+        opacity: 0.5;
+    }
+    100%{
+        right: 0rem;
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in-right{
+    0%{
+        position: relative;
+        opacity: 0;
+        left: 20rem;
+    }
+    50%{
+        left: 10rem;
+        opacity: 0.5;
+    }
+    100%{
+        left: 0rem;
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in-left-slide{
+    0%{
+        position: relative;
+        opacity: 0;
+        right: 20rem;
+    }
+    50%{
+        opacity: 1;
+        transform: scale(1);
+    }
+    100%{
+        
+    }
+}
+@keyframes fade-in-right{
+
 }
 
 @media screen and (min-width: 48rem) {

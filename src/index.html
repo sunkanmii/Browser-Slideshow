@@ -15,7 +15,6 @@
         <input type="file" id="fileElem" multiple accept="image/*" style="display:none"
             onchange="AddImgFiles(this.files)">
         <button id="add-pics">Select some files</button>
-        <img src="" alt="user-file" />
     </header>
 
     <main>
@@ -63,6 +62,8 @@
 
         <p id="error-message" aria-hidden="true"></p>
         
+        <button onclick="StartSlideShow()">Start slideshow</button>
+
         <button id="delete-img" onclick="DeleteImage()">Delete Image</button>
 
         <section id="effect-section">

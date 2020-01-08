@@ -67,13 +67,13 @@ function AddImgFiles(files) {
             if (i === 0 && imageLen === 2) {
                 nextButton.insertAdjacentHTML("beforebegin", `<img class="user-images" sizes="50vw" src ="${event.target.result}"/>`)
             } else if (i > 0 && imageLen === 2) {
-                nextButton.insertAdjacentHTML("beforebegin", `<img class="user-images" sizes="50vw" src ="${event.target.result}" hidden/>`);
+                nextButton.insertAdjacentHTML("beforebegin", `<img class="user-images" sizes="50vw" src ="${event.target.result}" style="display: none"/>`);
             }else if (i === 0 && imageLen > 2) {
-                firstImg.setAttribute("hidden", "true");
-                firstImg.insertAdjacentHTML("afterend", `<img class="user-images" sizes="50vw" src ="${event.target.result}"/>`);
+                firstImg.setAttribute("style", "display: none; opaque: 0");
+                firstImg.insertAdjacentHTML("afterend", `<img class="user-images" sizes="50vw" src ="${event.target.result}" />`);
             }
             else if(i > 0 && imageLen > 2){
-                firstImg.insertAdjacentHTML("afterend", `<img class="user-images" sizes="50vw" src ="${event.target.result}" hidden/>`);    
+                firstImg.insertAdjacentHTML("afterend", `<img class="user-images" sizes="50vw" src ="${event.target.result}" style="display: none; opaque: 0"/>`);    
             }
         });
 
@@ -157,8 +157,8 @@ function PreviousImage() {
     let prevImgInd = myCounter.DecCounter();
 
     if (userImgs[currImgInd] !== userImgs[0]) {
-        userImgs[currImgInd].setAttribute("hidden", "true");
-        userImgs[prevImgInd].removeAttribute("hidden");
+        userImgs[currImgInd].setAttribute("style", "animation: fade-in-left");
+        userImgs[prevImgInd].setAttribute("style", "animation: remove-left");
     } else {
         prevImgInd = myCounter.IncrCounter();
         errorMessage.textContent = "This is the first image!";
@@ -172,8 +172,8 @@ function NextImage() {
     let nextImgInd = myCounter.IncrCounter();
 
     if (userImgs[currImgInd] !== userImgs[userImgs.length - 1]) {
-        userImgs[currImgInd].setAttribute("hidden", "true");
-        userImgs[nextImgInd].removeAttribute("hidden");
+        userImgs[currImgInd].setAttribute("style", "animation: fade-in-right 0.4s ease-in 1 forwards");
+        userImgs[nextImgInd].removeAttribute("style", "animation: remove-right");
     } else {
         nextImgInd = myCounter.DecCounter();
         errorMessage.textContent = "This is the last image!";
@@ -203,4 +203,13 @@ function ToggleFullScreen() {
     if (videoElem.canPlayType("video/mp4; codecs=avc1.42E01E, mp4a.40.2")) {
         videoElem.requestFullscreen();
     }
+}
+
+function ToggleFullScreenSlideShow(){
+    
+}
+
+function StartSlideShow(){
+    ToggleFullScreenSlideShow();
+
 }
