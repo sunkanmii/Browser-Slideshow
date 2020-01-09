@@ -11,8 +11,7 @@ if('serviceWorker' in navigator){
     })  
 }
 else{
-    console.log('Service worker not supported
-');
+    console.log('Service worker not supported');
 }
 
 const addPicButton = document.querySelector("#add-pics");
