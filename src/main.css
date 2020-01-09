@@ -180,7 +180,9 @@ picture#first-image {
     }
     100%{
        opacity; 0;
+       right: 20rem;
        display: none;
+       
     }
 }
 
