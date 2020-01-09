@@ -121,6 +121,7 @@ picture#first-image {
     0%{
         position: relative;
         opacity: 0;
+        display: block;
         right: 20rem;
     }
     50%{
@@ -165,6 +166,22 @@ picture#first-image {
 }
 @keyframes fade-in-right{
 
+}
+
+@keyframes remove-right{
+    0%{
+       position: relative;
+       opacity: 1;
+       right: 0rem;
+    }
+    50%{ 
+       opacity: 0.1;
+       right: 20rem;
+    }
+    100%{
+       opacity; 0;
+       display: none;
+    }
 }
 
 @media screen and (min-width: 48rem) {
