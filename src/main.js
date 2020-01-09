@@ -157,8 +157,8 @@ function PreviousImage() {
     let prevImgInd = myCounter.DecCounter();
 
     if (userImgs[currImgInd] !== userImgs[0]) {
-        userImgs[currImgInd].setAttribute("style", "animation: fade-in-left");
-        userImgs[prevImgInd].setAttribute("style", "animation: remove-left");
+        userImgs[currImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards fade-in-left;");
+        userImgs[prevImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards remove-left;");
     } else {
         prevImgInd = myCounter.IncrCounter();
         errorMessage.textContent = "This is the first image!";
@@ -172,8 +172,8 @@ function NextImage() {
     let nextImgInd = myCounter.IncrCounter();
 
     if (userImgs[currImgInd] !== userImgs[userImgs.length - 1]) {
-        userImgs[currImgInd].setAttribute("style", "animation: 0.4s ease-in 0s 1 normal forwards remove-right");
-        userImgs[nextImgInd].removeAttribute("style", "animation: 0.4s ease-in 0s 1 normal forwards fade-in-left");
+        userImgs[currImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards remove-right;");
+        userImgs[nextImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards fade-in-left;");
     } else {
         nextImgInd = myCounter.DecCounter();
         errorMessage.textContent = "This is the last image!";
