@@ -1,4 +1,19 @@
 "use strict";
+if('serviceWorker' in navigator){
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+        .then(reg => {
+            console.log('Registrated: ', reg);  
+        })
+        .catch(err => {
+            console.log('Registration failed: ', err);
+        })
+    })  
+}
+else{
+    console.log('Service worker not supported
+');
+}
 
 const addPicButton = document.querySelector("#add-pics");
 const fileElem = document.querySelector("#fileElem");
