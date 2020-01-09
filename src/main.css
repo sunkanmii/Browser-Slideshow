@@ -129,6 +129,7 @@ picture#first-image {
         opacity: 0.5;
     }
     100%{
+        display: block;
         right: 0rem;
         opacity: 1;
     }
@@ -179,7 +180,7 @@ picture#first-image {
        right: 20rem;
     }
     100%{
-       opacity; 0;
+       opacity: 0;
        right: 20rem;
        display: none;
        
