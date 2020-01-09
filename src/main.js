@@ -172,8 +172,8 @@ function NextImage() {
     let nextImgInd = myCounter.IncrCounter();
 
     if (userImgs[currImgInd] !== userImgs[userImgs.length - 1]) {
-        userImgs[currImgInd].setAttribute("style", "animation: fade-in-right 0.4s ease-in 1 forwards");
-        userImgs[nextImgInd].removeAttribute("style", "animation: remove-right");
+        userImgs[currImgInd].setAttribute("style", "animation: 0.4s ease-in 0s 1 normal forwards remove-right");
+        userImgs[nextImgInd].removeAttribute("style", "animation: 0.4s ease-in 0s 1 normal forwards fade-in-left");
     } else {
         nextImgInd = myCounter.DecCounter();
         errorMessage.textContent = "This is the last image!";
@@ -206,7 +206,7 @@ function ToggleFullScreen() {
 }
 
 function ToggleFullScreenSlideShow(){
-    
+       
 }
 
 function StartSlideShow(){
