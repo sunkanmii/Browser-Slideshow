@@ -172,7 +172,7 @@ function NextImage() {
     let nextImgInd = myCounter.IncrCounter();
 
     if (userImgs[currImgInd] !== userImgs[userImgs.length - 1]) {
-        userImgs[currImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards remove-right;");
+        userImgs[currImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards remove-right;display: none;");
         userImgs[nextImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards fade-in-left;");
     } else {
         nextImgInd = myCounter.DecCounter();
