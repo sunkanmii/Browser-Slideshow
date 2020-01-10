@@ -157,6 +157,11 @@ picture#first-image {
     }
     50%{
         opacity: 1;
+        /*
+        transform: scale(x, y)
+        if y not specified, x value is used as default for y for
+        equal scale size.
+        */
         transform: scale(1);
     }
     100%{

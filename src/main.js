@@ -34,7 +34,7 @@ const GetUserImages = () => {
             return userImgs;
         }
     }
-}
+} 
 
 const Imgs = GetUserImages;
 
@@ -211,5 +211,4 @@ function ToggleFullScreenSlideShow(){
 
 function StartSlideShow(){
     ToggleFullScreenSlideShow();
-
 }
