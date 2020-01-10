@@ -17,23 +17,27 @@ article,
 figure {
     display: block;
 }
+
 .opaque {
     /* Theoretically for IE 8 & 9 (more valid) */
     /* ...but not required as filter works too */
     /* should come BEFORE filter */
-    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* IE8 */
-  
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    /* IE8 */
+
     /* This works in IE 8 & 9 too */
     /* ... but also 5, 6, 7 */
-    filter: alpha(opacity=50); /* IE 5-7 */
+    filter: alpha(opacity=50);
+    /* IE 5-7 */
     /* Modern Browsers */
-    
+
     opacity: 0.5;
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
+
 #add-pics {
     background-color: darkblue;
     -webkit-tap-highlight-color: transparent;
@@ -98,7 +102,8 @@ img {
     display: flex;
     flex-wrap: nowrap;
 }
-.slide-show-main > section{
+
+.slide-show-main>section {
     width: 10%;
     display: -webkit-box;
     display: -moz-box;
@@ -108,7 +113,7 @@ img {
     align-items: center;
 }
 
-.slide-show-main #previous-button{
+.slide-show-main #previous-button {
     justify-content: flex-end;
 }
 
@@ -117,45 +122,30 @@ picture#first-image {
     max-width: 50vw;
 }
 
-@keyframes fade-in-left{
-    0%{
+@keyframes fade-in-left {
+    0% {
         position: relative;
         opacity: 0;
+        display: block;
         right: 20rem;
     }
-    50%{
-        right: 10rem;
-        opacity: 0.5;
-    }
-    100%{
+    
+    100% {
+        display: block;
+        position: relative;
         right: 0rem;
         opacity: 1;
     }
 }
 
-@keyframes fade-in-right{
-    0%{
-        position: relative;
-        opacity: 0;
-        left: 20rem;
-    }
-    50%{
-        left: 10rem;
-        opacity: 0.5;
-    }
-    100%{
-        left: 0rem;
-        opacity: 1;
-    }
-}
-
-@keyframes fade-in-left-slide{
-    0%{
+@keyframes fade-in-left-slide {
+    0% {
         position: relative;
         opacity: 0;
         right: 20rem;
     }
-    50%{
+    
+    50% {
         opacity: 1;
         /*
         transform: scale(x, y)
@@ -164,12 +154,64 @@ picture#first-image {
         */
         transform: scale(1);
     }
-    100%{
-        
+    
+    100% {}
+}
+
+@keyframes fade-in-right {
+    0% {
+        position: relative;
+        opacity: 0;
+        display: block;
+        left: 20rem;
+    }
+    
+    100% {
+        position: relative;
+        left: 0rem;
+        display: block;
+        opacity: 1;
+    }
+
+}
+
+@keyframes remove-left {
+    0% {
+        position: relative;
+        opacity: 1;
+        right: 0rem;
+    }
+    
+    50% {
+        opacity: 0.4;
+        right: 20rem;
+    }
+
+    100% {
+        opacity: 0;
+        position: relative;
+        right: 20rem;
+        display: none;
     }
 }
-@keyframes fade-in-right{
 
+@keyframes remove-right {
+    0% {
+        position: relative;
+        opacity: 1;
+        left: 0rem;
+    }
+
+    50% {
+        opacity: 0.4;
+        left: 20rem;
+    }
+    
+    100% {
+        opacity: 0;
+        left: 20rem;
+        display: none;
+    }
 }
 
 @media screen and (min-width: 48rem) {
@@ -202,11 +244,12 @@ picture#first-image {
         width: 100%;
     }
 }
+
 /**
 75rem = 1200px
 **/
-@media screen and (min-width: 75rem){
-    
+@media screen and (min-width: 75rem) {
+
     .slide-show-main {
         width: 60%;
     }

@@ -1,4 +1,22 @@
 "use strict";
+if( 'function' === typeof importScripts) {
+    importScripts("older-browser-support/cache-polyfill/index.js");
+}
+
+if('serviceWorker' in navigator){
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js")
+        .then(reg => {
+            console.log("Service worker registrated: ", reg);
+        })
+        .catch(err => {
+            console.log("Service worker registration error: ", err);
+        })
+    })  
+}
+else{
+    console.log('Service worker not supported');
+}
 
 const addPicButton = document.querySelector("#add-pics");
 const fileElem = document.querySelector("#fileElem");
@@ -54,15 +72,15 @@ function AddImgFiles(files) {
     if (userImgs[0].alt === "flower") {
         userImageParent.removeChild(userImageParent.children[1]);
     }
-
+    
     const imageLen = userImageParent.childElementCount;
     const firstImg = userImageParent.children[1];
-
+    
     for (let i = 0; i < files.length; i++) {
         let cusfile = files[i];
-
+        
         let reader = new FileReader();
-
+        
         reader.addEventListener("load", function (event) {
             if (i === 0 && imageLen === 2) {
                 nextButton.insertAdjacentHTML("beforebegin", `<img class="user-images" sizes="50vw" src ="${event.target.result}"/>`)
@@ -76,10 +94,11 @@ function AddImgFiles(files) {
                 firstImg.insertAdjacentHTML("afterend", `<img class="user-images" sizes="50vw" src ="${event.target.result}" style="display: none; opaque: 0"/>`);    
             }
         });
-
+        
         reader.readAsDataURL(cusfile);
         Imgs();
     }
+    errorMessage.textContent = "";
 }
 
 // if(window.PointerEvent){
@@ -157,8 +176,9 @@ function PreviousImage() {
     let prevImgInd = myCounter.DecCounter();
 
     if (userImgs[currImgInd] !== userImgs[0]) {
-        userImgs[currImgInd].setAttribute("style", "animation: fade-in-left");
-        userImgs[prevImgInd].setAttribute("style", "animation: remove-left");
+        userImgs[currImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards remove-left; display: none;");
+        userImgs[prevImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards fade-in-left;");
+        errorMessage.textContent = "";
     } else {
         prevImgInd = myCounter.IncrCounter();
         errorMessage.textContent = "This is the first image!";
@@ -172,8 +192,9 @@ function NextImage() {
     let nextImgInd = myCounter.IncrCounter();
 
     if (userImgs[currImgInd] !== userImgs[userImgs.length - 1]) {
-        userImgs[currImgInd].setAttribute("style", "animation: fade-in-right 0.4s ease-in 1 forwards");
-        userImgs[nextImgInd].removeAttribute("style", "animation: remove-right");
+        userImgs[currImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards remove-right; display: none;");
+        userImgs[nextImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards fade-in-right;");
+        errorMessage.textContent = "";
     } else {
         nextImgInd = myCounter.DecCounter();
         errorMessage.textContent = "This is the last image!";
@@ -206,7 +227,7 @@ function ToggleFullScreen() {
 }
 
 function ToggleFullScreenSlideShow(){
-    
+       
 }
 
 function StartSlideShow(){
