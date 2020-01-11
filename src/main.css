@@ -139,6 +139,7 @@ img {
 .slide-show-main .slide-show-imgs{
     width: 80%;
     overflow: hidden;
+    height: auto;
 }
 .slide-show-main #previous-button {
     justify-content: flex-end;
