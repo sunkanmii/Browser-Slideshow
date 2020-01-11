@@ -8,18 +8,31 @@ const files = [
 ]
 
 const fileVersion = 'v1';
-self.addEventListener("install", )
+
+self.addEventListener("install", event => {
+    self.skipWaiting();
+
+    event.waitUntil(
+        caches.open(fileVersion)
+        .then(cache => {
+            return cache.addAll(files)
+        })
+        .catch(err => {
+            console.log("Error occurred while installing:\n", err);
+        })
+    )
+})
+
 self.addEventListener("activate", event => {
     console.log("Service worker activating.");
 
-    // deleting outdated cache.
     const cacheWhiteList = [fileVersion];
 
     event.waitUntil(
         caches.keys().then(cacheNames => {
             return Promise.all(
                 cacheNames.map(cacheName => {
-                    if (cacheWhiteList.indexOf(cacheName) === -1) {
+                    if(cacheWhiteList.indexOf(cacheName) === -1){
                         console.log("Deleting cache: ", cacheName);
                         return caches.delete(cacheName);
                     }
@@ -43,14 +56,8 @@ self.addEventListener("fetch", event => {
                     caches.open(fileVersion).then(cache => {
                         cache.put(event.request.url, response.clone());
                         return response;
-
-                    })
                 })
-
-        })
-        .catch(err => {
-            console.log("Fetch error: ", err);
-            return caches.match("src/offline.html");
+            })
         })
     )
 })

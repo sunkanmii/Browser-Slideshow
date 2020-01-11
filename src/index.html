@@ -33,8 +33,11 @@
 <body>
     <header>
         <input type="file" id="fileElem" multiple accept="image/*" style="display:none"
-            onchange="AddImgFiles(this.files)">
-        <button id="add-pics">Select some files</button>
+            onchange="AddImgFiles(this.files)"/>
+        <button id="add-pics">Add images</button>
+        <input type="file" id="audioFileElem" accept="audio/*" style="display: none"
+        onchange="AddAudioFile(this.files)"/>
+        <button id="add-audio">Add song</button>
     </header>
 
     <main>
@@ -81,6 +84,10 @@
         </section>
 
         <p id="error-message" aria-hidden="true"></p>
+
+        <audio controls src="">
+            Your browser <code>audio</code> element.
+        </audio>
 
         <button id="start-slideshow" onclick="StartSlideShow()">Start slideshow</button>
 

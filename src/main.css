@@ -205,6 +205,21 @@ picture#first-image {
 
 }
 
+@keyframes zoom-in {
+    0%{
+        opacity: 0;
+        width: 100%;
+    }
+    10%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 1;
+        width: 130%;
+    }
+
+}
+
 @keyframes remove-left {
     0% {
         position: relative;

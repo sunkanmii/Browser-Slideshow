@@ -30,6 +30,9 @@ const slideShowPic = document.querySelector(".slide-show-main picture source");
 const videoElem = document.querySelector("#main-container video");
 const errorMessage = document.querySelector("#error-message");
 const startSlideShowBut = document.querySelector("#start-slideshow");
+const audioTag = document.querySelector(".slide-show-main audio");
+const addAudio = document.querySelector("#add-audio");
+const audioFileElem = document.querySelector("#audioFileElem");
 const Counter = () => {
     let counter = 0;
 
@@ -72,6 +75,10 @@ function AddImgFiles(files) {
     let userImgs = GetUserImages().UserImages();
     let userImageParent = userImgs[0].parentNode;
     
+    if(userImageParent === null){
+        userImageParent = document.querySelector(".slide-show-main .slide-show-imgs");
+    }
+
     if (userImgs[0].alt === "flower") {
         userImageParent.removeChild(userImageParent.children[0]);
     }
@@ -172,6 +179,21 @@ function AddImgFiles(files) {
 
 //     rafPending = false;
 //   }
+addAudio.addEventListener("click", () => {
+    audioFileElem.click();
+});
+
+function AddAudioFile(audioFile){
+    let userAudioFile = audioFile[0];
+    
+    let reader = new FileReader();
+
+    reader.addEventListener("load", function(event){
+        audioTag.src = event.target.result;
+    })
+
+    reader.readAsDataURL(userAudioFile);
+}
 
 function PreviousImage() {
     let userImgs = Imgs().UserImages();
@@ -179,7 +201,8 @@ function PreviousImage() {
     let prevImgInd = myCounter.DecCounter();
 
     if (userImgs[currImgInd] !== userImgs[0]) {
-        userImgs[currImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards remove-left; display: none;");
+        userImgs[currImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards remove-left;");
+        userImgs[currImgInd].setAttribute("hidden", "true");
         userImgs[prevImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards fade-in-left;");
         errorMessage.textContent = "";
     } else {
@@ -195,7 +218,8 @@ function NextImage() {
     let nextImgInd = myCounter.IncrCounter();
 
     if (userImgs[currImgInd] !== userImgs[userImgs.length - 1]) {
-        userImgs[currImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards remove-right; display: none;");
+        userImgs[currImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards remove-right;");
+        userImgs[currImgInd].setAttribute("hidden", "true");
         userImgs[nextImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards fade-in-right;");
         errorMessage.textContent = "";
     } else {
@@ -206,14 +230,15 @@ function NextImage() {
 }    
 
 function DeleteImage(){
-    let imgElem = document.querySelector(".slide-show-main img[hidden]");
-    let imgParent = document.querySelector(".slide-show-main");
+    let imgElem = document.querySelector(".slide-show-main .slide-show-imgs img[hidden]");
     
+    let imgParent = document.querySelector(".slide-show-main .slide-show-imgs");
+
     if(imgElem === null){
-        imgElem = document.querySelector(".slide-show-main img");
+        imgElem = document.querySelector(".slide-show-main .slide-show-imgs img");
     }    
     
-    if(imgParent.childElementCount === 2){
+    if(imgParent.childElementCount === 0){
         errorMessage.setAttribute("aria-live", "assertive");
         errorMessage.setAttribute("aria-atomic", "true");
         errorMessage.textContent = "Nothing to delete here. Please add an image.";
@@ -243,6 +268,24 @@ function ToggleFullScreenSlideShow(){
 }    
 
 function StartSlideShow(){
+    let imgs = document.querySelectorAll(".slide-show-main .slide-show-imgs img");
+    let imgsLength = imgs.length;
+    let currImgInd = myCounter.CusCounter();
+    console.log(imgs[currImgInd]);
+
+    let slideShowInterval = setInterval(() => {
+        currImgInd++;
+
+        if(currImgInd === imgsLength - 1) {
+            currImgInd = 0;
+        }
+
+        imgs[currImgInd].setAttribute("style", "animation: 9s linear 1 forwards zoom-in"); 
+        imgs[currImgInd + 1].setAttribute("style", "animation: 9s linear 6s 1 forwards slide-in"); 
+    }, 6000);
+
+    slideShowInterval();
+
     ToggleFullScreenSlideShow();
 }
 
@@ -253,5 +296,4 @@ function SupportsFullScreen(){
     else{
         return true;
     }
-
 }
