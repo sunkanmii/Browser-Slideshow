@@ -1,4 +1,5 @@
 "use strict";
+
 if( 'function' === typeof importScripts) {
     importScripts("older-browser-support/cache-polyfill/index.js");
 }
@@ -24,9 +25,11 @@ const fullScreenCusParent = document.querySelector("#how-to-use video");
 const prevButton = document.querySelector("#previous-button");
 const nextButton = document.querySelector("#next-button");
 const slideShowMain = document.querySelector(".slide-show-main");
+const slideShowImgs = document.querySelector(".slide-show-imgs");
 const slideShowPic = document.querySelector(".slide-show-main picture source");
 const videoElem = document.querySelector("#main-container video");
 const errorMessage = document.querySelector("#error-message");
+const startSlideShowBut = document.querySelector("#start-slideshow");
 const Counter = () => {
     let counter = 0;
 
@@ -70,11 +73,11 @@ function AddImgFiles(files) {
     let userImageParent = userImgs[0].parentNode;
     
     if (userImgs[0].alt === "flower") {
-        userImageParent.removeChild(userImageParent.children[1]);
+        userImageParent.removeChild(userImageParent.children[0]);
     }
     
     const imageLen = userImageParent.childElementCount;
-    const firstImg = userImageParent.children[1];
+    const firstImg = userImageParent.children[0];
     
     for (let i = 0; i < files.length; i++) {
         let cusfile = files[i];
@@ -82,15 +85,15 @@ function AddImgFiles(files) {
         let reader = new FileReader();
         
         reader.addEventListener("load", function (event) {
-            if (i === 0 && imageLen === 2) {
-                nextButton.insertAdjacentHTML("beforebegin", `<img class="user-images" sizes="50vw" src ="${event.target.result}"/>`)
-            } else if (i > 0 && imageLen === 2) {
-                nextButton.insertAdjacentHTML("beforebegin", `<img class="user-images" sizes="50vw" src ="${event.target.result}" style="display: none"/>`);
-            }else if (i === 0 && imageLen > 2) {
+            if (i === 0 && imageLen === 0) {
+                slideShowImgs.insertAdjacentHTML("afterbegin", `<img class="user-images" sizes="50vw" src ="${event.target.result}"/>`)
+            } else if (i > 0 && imageLen === 0) {
+                slideShowImgs.insertAdjacentHTML("afterbegin", `<img class="user-images" sizes="50vw" src ="${event.target.result}" style="display: none"/>`);
+            }else if (i === 0 && imageLen > 1) {
                 firstImg.setAttribute("style", "display: none; opaque: 0");
                 firstImg.insertAdjacentHTML("afterend", `<img class="user-images" sizes="50vw" src ="${event.target.result}" />`);
             }
-            else if(i > 0 && imageLen > 2){
+            else if(i > 0 && imageLen > 1){
                 firstImg.insertAdjacentHTML("afterend", `<img class="user-images" sizes="50vw" src ="${event.target.result}" style="display: none; opaque: 0"/>`);    
             }
         });
@@ -127,9 +130,9 @@ function AddImgFiles(files) {
 
 //     // Remove Event Listeners
 //     if(this.window.PointerEvent){
-//         event.target.releasePointerCapture(eve)
+//         event.target.releasePointerCapture(eve)    
 //     }else{
-//         this.document.removeEventListener("mousemove", this.handleGestureMove, true);
+//         this.document.removeEventListener("mousemove", this.handleGestureMove, true);    
 //         this.document.removeEventListener("mouseup", this.handleGestureEnd, true);
 //     }
 
@@ -139,14 +142,14 @@ function AddImgFiles(files) {
 // }.bind(this);
 // s
 // function getGesturePointerFromEvent(event){
-//     var point = {};
+//     var point = {};    
 
 //     if(event.targetTouches){
-//         point.x = event.targetTouches[0].clientX;
+//         point.x = event.targetTouches[0].clientX;    
 //         point.y = event.targetTouces[0].clientY;
 //     }
 //     else{
-//         point.x = event.clientX;
+//         point.x = event.clientX;    
 //         point.y = event.clientY;
 //     }
 
@@ -155,7 +158,7 @@ function AddImgFiles(files) {
 
 // function onAnimFrame() {
 //     if(!rafPending) {
-//       return;
+//       return;    
 //     }
 
 //     var differenceInX = initialTouchPos.x - lastTouchPos.x;
@@ -183,8 +186,8 @@ function PreviousImage() {
         prevImgInd = myCounter.IncrCounter();
         errorMessage.textContent = "This is the first image!";
         errorMessage.setAttribute("aria-live", "polite");
-    }
-}
+    }    
+}    
 
 function NextImage() {
     let userImgs = Imgs().UserImages();
@@ -199,8 +202,8 @@ function NextImage() {
         nextImgInd = myCounter.DecCounter();
         errorMessage.textContent = "This is the last image!";
         errorMessage.setAttribute("aria-live", "polite");
-    }
-}
+    }    
+}    
 
 function DeleteImage(){
     let imgElem = document.querySelector(".slide-show-main img[hidden]");
@@ -208,28 +211,47 @@ function DeleteImage(){
     
     if(imgElem === null){
         imgElem = document.querySelector(".slide-show-main img");
-    }
+    }    
     
     if(imgParent.childElementCount === 2){
         errorMessage.setAttribute("aria-live", "assertive");
         errorMessage.setAttribute("aria-atomic", "true");
         errorMessage.textContent = "Nothing to delete here. Please add an image.";
-    }
+    }    
     else{
         imgParent.removeChild(imgElem);
-    }
-}
+    }    
+}    
 
 function ToggleFullScreen() {
     if (videoElem.canPlayType("video/mp4; codecs=avc1.42E01E, mp4a.40.2")) {
         videoElem.requestFullscreen();
-    }
-}
+    }    
+}    
 
 function ToggleFullScreenSlideShow(){
-       
-}
+    if(SupportsFullScreen() === true && prevButton.style.display !== "none"){
+        slideShowImgs.requestFullscreen();
+        console.log("I reached here.");
+    }    
+    else {
+        console.log("I reached here.");
+        prevButton.style.display = "inline";
+        nextButton.style.display = "inline";
+        document.exitFullscreen();
+    }    
+}    
 
 function StartSlideShow(){
     ToggleFullScreenSlideShow();
+}
+
+function SupportsFullScreen(){
+    if(document.fullscreenEnabled === false){
+        return "Fullscreen not supported on this browser."
+    }
+    else{
+        return true;
+    }
+
 }

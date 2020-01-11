@@ -69,10 +69,10 @@
                     <img id="first-image" srcset="/imgs/Image106.jpg 1600w, /imgs/Image103.jpg 1000w, /imgs/Image104.jpg 800w, /imgs/Image107.jpg 500w" sizes="(max-width: 768px) 90vw, 50vw" alt="first slideshow image"/>
                     <img style="display: none" id="next-image" srcset="/imgs/Image106.jpg 1600w, /imgs/Image103.jpg 1000w, /imgs/Image104.jpg 800w, /imgs/Image107.jpg 500w" sizes="50vw" alt="second slideshow image"/>
                 -->
-
+                <section class="slide-show-imgs">
                 <!--If the brower doesn't support the picture element.-->
-                <img class="user-images" src="/imgs/Image107.jpg" sizes="50vw" alt="flower" />
-
+                    <img class="user-images" src="/imgs/Image107.jpg" sizes="50vw" alt="flower" />
+                </section>
                 <section id="next-button">
                     <button onclick="NextImage()">next</button>
                 </section>
@@ -82,7 +82,7 @@
 
         <p id="error-message" aria-hidden="true"></p>
 
-        <button onclick="StartSlideShow()">Start slideshow</button>
+        <button id="start-slideshow" onclick="StartSlideShow()">Start slideshow</button>
 
         <button id="delete-img" onclick="DeleteImage()">Delete Image</button>
 
