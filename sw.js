@@ -1,3 +1,4 @@
+// Service worker is placed at the root directory for security reasons.
 const files = [
     '/',
     'imgs/',
@@ -7,23 +8,7 @@ const files = [
 ]
 
 const fileVersion = 'v1';
-
-self.addEventListener("install", event => {
-    console.log("Service worker installing.");
-
-    self.skipWaiting();
-
-    event.waitUntil(
-        caches.open(fileVersion)
-        .then(cache => {
-            return cache.addAll(files);
-        })
-        .catch(err => {
-            console.log("Installation error: ", err);
-        })
-    )
-})
-
+self.addEventListener("install", )
 self.addEventListener("activate", event => {
     console.log("Service worker activating.");
 
