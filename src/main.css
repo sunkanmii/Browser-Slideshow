@@ -113,7 +113,7 @@ p + p{
 }
 
 img {
-    max-width: 100%;
+    max-width: 130%;
     height: auto;
 }
 
@@ -156,12 +156,10 @@ picture#first-image {
     0% {
         position: relative;
         opacity: 0;
-        display: block;
         right: 20rem;
     }
     
     100% {
-        display: block;
         position: relative;
         right: 0rem;
         opacity: 1;
@@ -192,14 +190,12 @@ picture#first-image {
     0% {
         position: relative;
         opacity: 0;
-        display: block;
         left: 20rem;
     }
     
     100% {
         position: relative;
         left: 0rem;
-        display: block;
         opacity: 1;
     }
 
@@ -208,16 +204,31 @@ picture#first-image {
 @keyframes zoom-in {
     0%{
         opacity: 0;
+        position: relative;
         width: 100%;
     }
-    10%{
+    50%{
         opacity: 1;
+        width: 120%;
     }
     100%{
-        opacity: 1;
+        opacity: 0;
         width: 130%;
     }
+}
 
+@keyframes slide-in{
+    0%{
+        opacity: 0.2;
+        position: relative;
+        right: 20rem;
+        width: 100%;
+    }
+    100%{
+        position: relative;
+        right: 0rem;
+        opacity: 1;
+    }
 }
 
 @keyframes remove-left {

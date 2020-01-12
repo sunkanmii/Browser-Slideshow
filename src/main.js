@@ -1,21 +1,20 @@
 "use strict";
 
-if( 'function' === typeof importScripts) {
+if ('function' === typeof importScripts) {
     importScripts("older-browser-support/cache-polyfill/index.js");
 }
 
-if('serviceWorker' in navigator){
+if ('serviceWorker' in navigator) {
     window.addEventListener("load", () => {
         navigator.serviceWorker.register("/sw.js")
-        .then(reg => {
-            console.log("Service worker registrated: ", reg);
-        })
-        .catch(err => {
-            console.log("Service worker registration error: ", err);
-        })
-    })  
-}
-else{
+            .then(reg => {
+                console.log("Service worker registrated: ", reg);
+            })
+            .catch(err => {
+                console.log("Service worker registration error: ", err);
+            })
+    })
+} else {
     console.log('Service worker not supported');
 }
 
@@ -30,9 +29,23 @@ const slideShowPic = document.querySelector(".slide-show-main picture source");
 const videoElem = document.querySelector("#main-container video");
 const errorMessage = document.querySelector("#error-message");
 const startSlideShowBut = document.querySelector("#start-slideshow");
-const audioTag = document.querySelector(".slide-show-main audio");
+const audioTag = document.querySelector("main #user-audio");
 const addAudio = document.querySelector("#add-audio");
 const audioFileElem = document.querySelector("#audioFileElem");
+
+function exitHandler(slideShowInterval) {
+    if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement) {
+        clearInterval(slideShowInterval);
+    }
+}
+
+document.addEventListener('fullscreenchange', exitHandler, false);
+document.addEventListener('mozfullscreenchange', exitHandler, false);
+document.addEventListener('MSFullscreenChange', exitHandler, false);
+document.addEventListener('webkitfullscreenchange', exitHandler, false);
+
+
+
 const Counter = () => {
     let counter = 0;
 
@@ -58,7 +71,7 @@ const GetUserImages = () => {
             return userImgs;
         }
     }
-} 
+}
 
 const Imgs = GetUserImages;
 
@@ -67,44 +80,45 @@ if (videoElem.canPlayType("video/mp4; codecs=avc1.42E01E, mp4a.40.2")) {
 }
 const pics = [];
 
-addPicButton.addEventListener("click", () => {
-    fileElem.click();
-})
+const file =
+
+
+    addPicButton.addEventListener("click", () => {
+        fileElem.click();
+    })
 
 function AddImgFiles(files) {
     let userImgs = GetUserImages().UserImages();
     let userImageParent = userImgs[0].parentNode;
-    
-    if(userImageParent === null){
+
+    if (userImageParent === null) {
         userImageParent = document.querySelector(".slide-show-main .slide-show-imgs");
     }
 
     if (userImgs[0].alt === "flower") {
         userImageParent.removeChild(userImageParent.children[0]);
     }
-    
+
     const imageLen = userImageParent.childElementCount;
     const firstImg = userImageParent.children[0];
-    
+
     for (let i = 0; i < files.length; i++) {
         let cusfile = files[i];
-        
+
         let reader = new FileReader();
-        
+
         reader.addEventListener("load", function (event) {
             if (i === 0 && imageLen === 0) {
                 slideShowImgs.insertAdjacentHTML("afterbegin", `<img class="user-images" sizes="50vw" src ="${event.target.result}"/>`)
             } else if (i > 0 && imageLen === 0) {
-                slideShowImgs.insertAdjacentHTML("afterbegin", `<img class="user-images" sizes="50vw" src ="${event.target.result}" style="display: none"/>`);
-            }else if (i === 0 && imageLen > 1) {
-                firstImg.setAttribute("style", "display: none; opaque: 0");
-                firstImg.insertAdjacentHTML("afterend", `<img class="user-images" sizes="50vw" src ="${event.target.result}" />`);
-            }
-            else if(i > 0 && imageLen > 1){
-                firstImg.insertAdjacentHTML("afterend", `<img class="user-images" sizes="50vw" src ="${event.target.result}" style="display: none; opaque: 0"/>`);    
+                slideShowImgs.insertAdjacentHTML("afterbegin", `<img class="user-images" sizes="50vw" src ="${event.target.result}" hidden/>`);
+            } else if (i === 0 && imageLen > 1) {
+                firstImg.insertAdjacentHTML("afterend", `<img class="user-images" sizes="50vw" src ="${event.target.result}" hidden/>`);
+            } else if (i > 0 && imageLen > 1) {
+                firstImg.insertAdjacentHTML("afterend", `<img class="user-images" sizes="50vw" src ="${event.target.result}" hidden"/>`);
             }
         });
-        
+
         reader.readAsDataURL(cusfile);
         Imgs();
     }
@@ -183,12 +197,12 @@ addAudio.addEventListener("click", () => {
     audioFileElem.click();
 });
 
-function AddAudioFile(audioFile){
+function AddAudioFile(audioFile) {
     let userAudioFile = audioFile[0];
-    
+
     let reader = new FileReader();
 
-    reader.addEventListener("load", function(event){
+    reader.addEventListener("load", function (event) {
         audioTag.src = event.target.result;
     })
 
@@ -203,14 +217,15 @@ function PreviousImage() {
     if (userImgs[currImgInd] !== userImgs[0]) {
         userImgs[currImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards remove-left;");
         userImgs[currImgInd].setAttribute("hidden", "true");
+        userImgs[prevImgInd].removeAttribute("hidden");
         userImgs[prevImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards fade-in-left;");
         errorMessage.textContent = "";
     } else {
         prevImgInd = myCounter.IncrCounter();
         errorMessage.textContent = "This is the first image!";
         errorMessage.setAttribute("aria-live", "polite");
-    }    
-}    
+    }
+}
 
 function NextImage() {
     let userImgs = Imgs().UserImages();
@@ -220,80 +235,84 @@ function NextImage() {
     if (userImgs[currImgInd] !== userImgs[userImgs.length - 1]) {
         userImgs[currImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards remove-right;");
         userImgs[currImgInd].setAttribute("hidden", "true");
+        userImgs[nextImgInd].removeAttribute("hidden");
         userImgs[nextImgInd].setAttribute("style", "animation: 0.4s ease-in 1 forwards fade-in-right;");
         errorMessage.textContent = "";
     } else {
         nextImgInd = myCounter.DecCounter();
         errorMessage.textContent = "This is the last image!";
         errorMessage.setAttribute("aria-live", "polite");
-    }    
-}    
+    }
+}
 
-function DeleteImage(){
+function DeleteImage() {
     let imgElem = document.querySelector(".slide-show-main .slide-show-imgs img[hidden]");
-    
+
     let imgParent = document.querySelector(".slide-show-main .slide-show-imgs");
 
-    if(imgElem === null){
+    if (imgElem === null) {
         imgElem = document.querySelector(".slide-show-main .slide-show-imgs img");
-    }    
-    
-    if(imgParent.childElementCount === 0){
+    }
+
+    if (imgParent.childElementCount === 0) {
         errorMessage.setAttribute("aria-live", "assertive");
         errorMessage.setAttribute("aria-atomic", "true");
         errorMessage.textContent = "Nothing to delete here. Please add an image.";
-    }    
-    else{
+    } else {
         imgParent.removeChild(imgElem);
-    }    
-}    
+    }
+}
 
 function ToggleFullScreen() {
     if (videoElem.canPlayType("video/mp4; codecs=avc1.42E01E, mp4a.40.2")) {
         videoElem.requestFullscreen();
-    }    
-}    
+    }
+}
 
-function ToggleFullScreenSlideShow(){
-    if(SupportsFullScreen() === true && prevButton.style.display !== "none"){
+function ToggleFullScreenSlideShow() {
+    if (SupportsFullScreen() === true && prevButton.style.display !== "none") {
         slideShowImgs.requestFullscreen();
         console.log("I reached here.");
-    }    
-    else {
+    } else {
         console.log("I reached here.");
         prevButton.style.display = "inline";
         nextButton.style.display = "inline";
         document.exitFullscreen();
-    }    
-}    
+    }
+}
 
-function StartSlideShow(){
+function StartSlideShow() {
     let imgs = document.querySelectorAll(".slide-show-main .slide-show-imgs img");
     let imgsLength = imgs.length;
     let currImgInd = myCounter.CusCounter();
+
     console.log(imgs[currImgInd]);
-
+    
     let slideShowInterval = setInterval(() => {
-        currImgInd++;
-
-        if(currImgInd === imgsLength - 1) {
+        
+        if (currImgInd === imgsLength - 1) {
             currImgInd = 0;
         }
+        
+        if (currImgInd > 0) {
+            imgs[currImgInd - 1].setAttribute("hidden", "true");
+            imgs[currImgInd].removeAttribute("hidden");
+        }
+        
+        imgs[currImgInd].setAttribute("style", "animation: 8s linear 1 forwards zoom-in");
+        currImgInd++;
+    }, 8000);
 
-        imgs[currImgInd].setAttribute("style", "animation: 9s linear 1 forwards zoom-in"); 
-        imgs[currImgInd + 1].setAttribute("style", "animation: 9s linear 6s 1 forwards slide-in"); 
-    }, 6000);
-
-    slideShowInterval();
+    slideShowInterval;
+    // exitHandler(slideShowInterval);
 
     ToggleFullScreenSlideShow();
 }
 
-function SupportsFullScreen(){
-    if(document.fullscreenEnabled === false){
+function SupportsFullScreen() {
+    if (document.fullscreenEnabled === false) {
         return "Fullscreen not supported on this browser."
-    }
-    else{
+    } else {
         return true;
     }
 }
