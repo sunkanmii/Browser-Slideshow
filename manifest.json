@@ -1,31 +1,29 @@
 {
-    "name": "Slide show",
-    "short-name": "Slide-S",
-    "lang": "en-US",
-    "start_url": "src/index.html",
-    "display": "standalone",
-    "theme-color": "#FF9800",
-    "background-color": "#FF9800",
-    "icons": [
-        {
-            "src": "images/touch/icon-128x128.png",
-      "sizes": "128x128"
-    },
-    {
-      "src": "images/touch/icon-192x192.png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "images/touch/icon-256x256.png",
-      "sizes": "256x256"
-    },
-    {
-      "src": "images/touch/icon-384x384.png",
-      "sizes": "384x384"
-    },
-    {
-      "src": "images/touch/icon-512x512.png",
-      "sizes": "512x512"
-        }
-    ]
+  "name": "Slideshow",
+  "short_name": "Slideshow",
+  "start_url": "src/index.html",
+  "background_color": "#3498DC",
+  "theme_color": "#34495E",
+  "orientation": "any",
+  "display": "standalone",
+
+  "icons": [{
+    "src": "imgs/slideshow.png",
+    "type": "image/png",
+    "sizes": "512x512"
+  }],
+
+  "dir": "ltr",
+  "lang": "en-US",
+  "description": "Enjoy a visuallly engaging display of your pictures with music.",
+  "scope": "/",
+  "screenshots": [{
+    "src": ""
+  }],
+  "related_applications": [{
+    "platform": "play",
+    "url": "",
+    "id": "" 
+  }],
+  "prefer_related_applications": true 
 }

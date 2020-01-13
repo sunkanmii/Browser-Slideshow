@@ -1,5 +1,9 @@
 "use strict";
 
+if (!('indexedDB' in window)) {
+    console.log('This browser doesn\'t support IndexedDB');
+}
+
 if ('function' === typeof importScripts) {
     importScripts("older-browser-support/cache-polyfill/index.js");
 }
@@ -33,8 +37,29 @@ const audioTag = document.querySelector("main #user-audio");
 const addAudio = document.querySelector("#add-audio");
 const audioFileElem = document.querySelector("#audioFileElem");
 
-function exitHandler(slideShowInterval) {
-    if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement) {
+
+function exitHandler() {
+    let imgs = document.querySelectorAll(".slide-show-main .slide-show-imgs img");
+    let imgsLength = imgs.length;
+    let currImgInd = myCounter.CusCounter();
+
+    let slideShowInterval = setInterval(function () {
+
+        if (currImgInd === imgsLength - 1) {
+            currImgInd = 0;
+        }
+
+        if (currImgInd > 0) {
+            imgs[currImgInd - 1].setAttribute("hidden", "true");
+            imgs[currImgInd].removeAttribute("hidden");
+        }
+
+        imgs[currImgInd].setAttribute("style", "animation: 8s linear 1 forwards zoom-in");
+        currImgInd++;
+    }, 8000);
+
+
+    if (!document.fullscreenElement) {
         clearInterval(slideShowInterval);
     }
 }
@@ -43,8 +68,6 @@ document.addEventListener('fullscreenchange', exitHandler, false);
 document.addEventListener('mozfullscreenchange', exitHandler, false);
 document.addEventListener('MSFullscreenChange', exitHandler, false);
 document.addEventListener('webkitfullscreenchange', exitHandler, false);
-
-
 
 const Counter = () => {
     let counter = 0;
@@ -61,6 +84,7 @@ const Counter = () => {
         }
     }
 }
+
 const myCounter = Counter();
 
 const GetUserImages = () => {
@@ -78,14 +102,12 @@ const Imgs = GetUserImages;
 if (videoElem.canPlayType("video/mp4; codecs=avc1.42E01E, mp4a.40.2")) {
     console.log("Video element of type mp4 is supported.");
 }
+
 const pics = [];
 
-const file =
-
-
-    addPicButton.addEventListener("click", () => {
-        fileElem.click();
-    })
+addPicButton.addEventListener("click", () => {
+    fileElem.click();
+})
 
 function AddImgFiles(files) {
     let userImgs = GetUserImages().UserImages();
@@ -109,13 +131,13 @@ function AddImgFiles(files) {
 
         reader.addEventListener("load", function (event) {
             if (i === 0 && imageLen === 0) {
-                slideShowImgs.insertAdjacentHTML("afterbegin", `<img class="user-images" sizes="50vw" src ="${event.target.result}"/>`)
+                slideShowImgs.insertAdjacentHTML("beforeend", `<img class="user-images" sizes="50vw" src ="${event.target.result}"/>`)
             } else if (i > 0 && imageLen === 0) {
-                slideShowImgs.insertAdjacentHTML("afterbegin", `<img class="user-images" sizes="50vw" src ="${event.target.result}" hidden/>`);
+                slideShowImgs.insertAdjacentHTML("beforeend", `<img class="user-images" sizes="50vw" src ="${event.target.result}" hidden/>`);
             } else if (i === 0 && imageLen > 1) {
                 firstImg.insertAdjacentHTML("afterend", `<img class="user-images" sizes="50vw" src ="${event.target.result}" hidden/>`);
             } else if (i > 0 && imageLen > 1) {
-                firstImg.insertAdjacentHTML("afterend", `<img class="user-images" sizes="50vw" src ="${event.target.result}" hidden"/>`);
+                firstImg.insertAdjacentHTML("afterend", `<img class="user-images" sizes="50vw" src ="${event.target.result}" hidden/>`);
             }
         });
 
@@ -282,29 +304,6 @@ function ToggleFullScreenSlideShow() {
 }
 
 function StartSlideShow() {
-    let imgs = document.querySelectorAll(".slide-show-main .slide-show-imgs img");
-    let imgsLength = imgs.length;
-    let currImgInd = myCounter.CusCounter();
-
-    console.log(imgs[currImgInd]);
-    
-    let slideShowInterval = setInterval(() => {
-        
-        if (currImgInd === imgsLength - 1) {
-            currImgInd = 0;
-        }
-        
-        if (currImgInd > 0) {
-            imgs[currImgInd - 1].setAttribute("hidden", "true");
-            imgs[currImgInd].removeAttribute("hidden");
-        }
-        
-        imgs[currImgInd].setAttribute("style", "animation: 8s linear 1 forwards zoom-in");
-        currImgInd++;
-    }, 8000);
-
-    slideShowInterval;
-    // exitHandler(slideShowInterval);
 
     ToggleFullScreenSlideShow();
 }
