@@ -67,23 +67,25 @@ p + p{
     color: black;
 }
 
-#add-pics:hover {
+#add-pics:hover, #add-audio:hover {
     background-color: rgb(158, 158, 236);
 }
 
-#add-pics::moz-focus-inner {
+#add-pics::moz-focus-inner, #add-audio::-moz-focus-inner {
     border: 0;
 }
 
-#add-pics:focus {
+#add-pics:focus, #add-audio:focus {
     outline: 0;
     background-color: rgb(90, 90, 208);
 }
 
-#add-pics:active {
+#add-pics:active, #add-audio:active {
     background-color: rgb(90, 90, 208);
 }
-
+#how-to-use{
+    margin-bottom: 40px;
+}
 .no-flexbox #main-container {
     overflow: auto;
     width: 100%;
@@ -274,21 +276,24 @@ picture#first-image {
     img {
         width: 100%;
     }
-
+    
     #how-to-use {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        width: 80%;
+        width: 70%;
         flex-wrap: wrap;
+        justify-items: center;
     }
 
     #how-to-use h1 {
         width: 100%;
     }
-
+    
     #how-to-use video {
-        width: 60%;
+        width: 100%;
+        align-self: center;
+        justify-self: center;
         height: auto;
     }
 

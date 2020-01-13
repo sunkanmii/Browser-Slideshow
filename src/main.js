@@ -37,31 +37,47 @@ const audioTag = document.querySelector("main #user-audio");
 const addAudio = document.querySelector("#add-audio");
 const audioFileElem = document.querySelector("#audioFileElem");
 
+function checkAudio(){
+    if(audioTag.src === ""){
+        return false;
+    }
+    else{
+        return true;
+    }
+}
 
 function exitHandler() {
     let imgs = document.querySelectorAll(".slide-show-main .slide-show-imgs img");
     let imgsLength = imgs.length;
     let currImgInd = myCounter.CusCounter();
+    
+    imgs[currImgInd].setAttribute("style", "animation: 8s linear 1 forwards zoom-in");
+    currImgInd++;
 
     let slideShowInterval = setInterval(function () {
-
+        if (document.fullscreenElement) {
+            if(checkAudio() === true){
+                audioTag.play();
+            }
+        } else {
+            imgs[currImgInd - 1].removeAttribute("style");
+            clearInterval(slideShowInterval);
+            return; // Force setInterval to stop
+        }
+        
         if (currImgInd === imgsLength - 1) {
             currImgInd = 0;
         }
-
-        if (currImgInd > 0) {
+        
+        if (currImgInd >= 1) {
             imgs[currImgInd - 1].setAttribute("hidden", "true");
             imgs[currImgInd].removeAttribute("hidden");
         }
-
-        imgs[currImgInd].setAttribute("style", "animation: 8s linear 1 forwards zoom-in");
+        
+        imgs[currImgInd].setAttribute("style", "6s cubic-bezier(0, 0, 1, 1.01) 1 forwards zoom-in");
         currImgInd++;
     }, 8000);
 
-
-    if (!document.fullscreenElement) {
-        clearInterval(slideShowInterval);
-    }
 }
 
 document.addEventListener('fullscreenchange', exitHandler, false);
