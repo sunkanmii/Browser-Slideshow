@@ -57,7 +57,7 @@ p + p{
     margin-top: 2rem;
 }
 
-#add-pics {
+#add-pics, #add-audio {
     background-color: #7878ff;
     -webkit-tap-highlight-color: transparent;
     background-image: none;
