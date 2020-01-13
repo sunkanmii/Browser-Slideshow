@@ -92,7 +92,7 @@ p + p{
     min-height: 400px;
 }
 
-.flexbox #main-container {
+#main-container {
     /**
     display: grid;
     grid-template-columns: 40px 30px 40px;
@@ -110,7 +110,7 @@ p + p{
     min-height: 400px;
 }
 
-.flexbox #main-container #section-show-container {
+#main-container #section-show-container {
     width: 40%;
 }
 
