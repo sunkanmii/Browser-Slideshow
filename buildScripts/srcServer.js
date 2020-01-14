@@ -1,8 +1,18 @@
-const express = require('express');
-const path = require('path');
-const open = require('open');
+import express from 'express';
+import path from 'path';
+import open from 'open';
+import webpack from 'webpack';
+import config from '../webpack.config.dev';
 
+
+const port = 3000;
 const app = express();
+const compiler = webpack(config);
+
+app.use(require('webpack-dev-middleware')(compiler, {
+    noInfo: true,
+    noPublic: config.output.publicPath
+}));
 
 // What routes should be handled (first param)
 app.get('/', function(req, res){

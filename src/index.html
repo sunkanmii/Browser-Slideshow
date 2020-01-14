@@ -35,7 +35,7 @@
     <link rel="stylesheet" media="screen" type="text/css" href="main.css" />
 </head>
 
-<body>
+<body style="display: relative; z-index: 1">
     <header>
         <input type="file" id="fileElem" multiple accept="image/*" style="display:none"
             onchange="AddImgFiles(this.files)"/>
@@ -56,7 +56,7 @@
                         Check mobile browser developer tools for more info with and without type 
                         attribute.
                     -->
-                    <source src="/videos/" type="video/mp4" />
+                    <source src="" type="video/mp4" />
 
                     <track src="/chrome-subtitles-en.vtt" label="English captions" kind="captions" srclang="en"
                         default />
@@ -90,9 +90,17 @@
 
         <p id="error-message" aria-hidden="true"></p>
 
-        <audio id="user-audio" controls src="">
+        <audio id="user-audio" controls src="" hidden>
             Your browser does not support <code>audio</code> element.
         </audio>
+        <!--        
+        <section id="audio-popup" hidden>
+            <section>
+            <p>Do you want to add audio before starting slideshow?</p>
+            <button id="accept">Yes</button> or <button id="reject">No</button>
+            </section>
+        </section>
+        -->
 
         <button id="start-slideshow" onclick="StartSlideShow()">Start slideshow</button>
 
@@ -103,14 +111,14 @@
 
             <select aria-labelledby="effect">
                 <option>Fade in</option>
-                <option>Fade out</option>
-                <option>Star wipe</option>
-                <option>Window wipe (not sure)</option>
+                <option disabled>Fade out (in-development)</option>
+                <option disabled>Star wipe (in-development)</option>
+                <option disabled>Window wipe (in-development)</option>
             </select>
         </section>
     </main>
 
-    <script src="main.js" type="text/javascript"></script>
+    <script src="bundle.js" type="text/javascript"></script>
 </body>
 
 </html>

@@ -36,13 +36,16 @@ const startSlideShowBut = document.querySelector("#start-slideshow");
 const audioTag = document.querySelector("main #user-audio");
 const addAudio = document.querySelector("#add-audio");
 const audioFileElem = document.querySelector("#audioFileElem");
+const audioPopUp = document.querySelector("#audio-popup");
+const acceptButton = document.querySelector("#accept");
+const rejectButton = document.querySelector("#reject");
 
 function checkAudio(){
-    if(audioTag.src === ""){
-        return false;
+    if(audioTag.getAttribute("hidden") === null){
+        return true;
     }
     else{
-        return true;
+        return false;
     }
 }
 

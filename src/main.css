@@ -153,6 +153,23 @@ picture#first-image {
     transition: width 0.5s;
     max-width: 50vw;
 }
+#audio-popup{
+    display: flex;
+    width: 100%;
+    position: absolute;
+    min-height: 70rem;
+    z-index: 99;
+    top: 0rem;
+    right: 0rem;
+    background-color: rgba(140, 140, 140, 0.707);
+}
+#audio-popup section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
 
 @keyframes fade-in-left {
     0% {
