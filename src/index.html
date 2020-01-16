@@ -32,7 +32,13 @@
     <link rel="icon" sizes="512x512" href="/imgs/slideshow.png">
     <link rel="apple-touch-icon" sizes="512x512" href="/imgs/slideshow.png">
     <title>Slide show</title>
-    <link rel="stylesheet" media="screen" type="text/css" href="main.css" />
+<!--     
+    <link rel="preload" as="font" crossorigin="crossorigin" type="font/woff2" href="custom.woff2"/> 
+-->
+    <link rel="preload" as="style" onload="this.rel='stylesheet'" media="screen" href="main.css" />
+    <noscript>
+        <link rel="stylesheet" media="screen" type="text/css" href="main.css"/>
+    </noscript>
 </head>
 
 <body style="display: relative; z-index: 1">
@@ -112,13 +118,15 @@
             <select aria-labelledby="effect">
                 <option>Fade in</option>
                 <option disabled>Fade out (in-development)</option>
+                <!--
                 <option disabled>Star wipe (in-development)</option>
                 <option disabled>Window wipe (in-development)</option>
+                -->
             </select>
         </section>
     </main>
 
-    <script src="bundle.js" type="text/javascript"></script>
+    <script src="main.js" type="text/javascript" async></script>
 </body>
 
 </html>

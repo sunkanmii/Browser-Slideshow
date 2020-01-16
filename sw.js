@@ -1,4 +1,3 @@
-// Service worker is placed at the root directory for security reasons.
 const files = [
     '/',
     'imgs/',
