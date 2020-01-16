@@ -150,7 +150,7 @@ function AddImgFiles(files) {
 
         reader.addEventListener("load", function (event) {
             if (i === 0 && imageLen === 0) {
-                slideShowImgs.insertAdjacentHTML("beforeend", `<img class="user-images" sizes="50vw" src ="${event.target.result}"/>`)
+                slideShowImgs.insertAdjacentHTML("beforeend", `<img class="user-images" sizes="50vw" src ="${event.target.result}" />`)
             } else if (i > 0 && imageLen === 0) {
                 slideShowImgs.insertAdjacentHTML("beforeend", `<img class="user-images" sizes="50vw" src ="${event.target.result}" hidden/>`);
             } else if (i === 0 && imageLen > 1) {
@@ -287,20 +287,22 @@ function NextImage() {
 }
 
 function DeleteImage() {
-    let imgElem = document.querySelector(".slide-show-main .slide-show-imgs img[hidden]");
-
+    let imgElem = document.querySelector(".slide-show-main .slide-show-imgs img[hidden=false]");
     let imgParent = document.querySelector(".slide-show-main .slide-show-imgs");
-
+    
     if (imgElem === null) {
         imgElem = document.querySelector(".slide-show-main .slide-show-imgs img");
     }
-
+    
     if (imgParent.childElementCount === 0) {
         errorMessage.setAttribute("aria-live", "assertive");
         errorMessage.setAttribute("aria-atomic", "true");
         errorMessage.textContent = "Nothing to delete here. Please add an image.";
     } else {
         imgParent.removeChild(imgElem);
+        let userImgs = Imgs().UserImages();
+        let currImgInd = myCounter.CusCounter();
+        userImgs[currImgInd].removeAttribute("hidden");
     }
 }
 
