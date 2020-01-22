@@ -1,7 +1,7 @@
 {
   "name": "Slideshow",
   "short_name": "Slideshow",
-  "start_url": "/src/index.html",
+  "start_url": "/index.html",
   "background_color": "#3498DC",
   "theme_color": "#34495E",
   "orientation": "any",

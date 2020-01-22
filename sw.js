@@ -1,7 +1,7 @@
 const files = [
     '/',
     'imgs/',
-    'src/index.html',
+    '/index.html',
     'src/main.css',
     'src/main.js'
 ]
