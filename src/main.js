@@ -54,7 +54,7 @@ function exitHandler() {
     let imgsLength = imgs.length;
     let currImgInd = myCounter.CusCounter();
     
-    imgs[currImgInd].setAttribute("style", "animation: 8s linear 1 forwards zoom-in");
+    imgs[currImgInd].setAttribute("style", "animation: 6s linear 1 forwards zoom-in");
     currImgInd++;
 
     let slideShowInterval = setInterval(function () {
@@ -68,7 +68,9 @@ function exitHandler() {
             return; // Force setInterval to stop
         }
         
-        if (currImgInd === imgsLength - 1) {
+        //  repeats slideshow.
+        if (currImgInd === imgsLength) {
+            imgs[currImgInd - 1].setAttribute("hidden", "true");
             currImgInd = 0;
         }
         
@@ -76,10 +78,14 @@ function exitHandler() {
             imgs[currImgInd - 1].setAttribute("hidden", "true");
             imgs[currImgInd].removeAttribute("hidden");
         }
-        
-        imgs[currImgInd].setAttribute("style", "6s cubic-bezier(0, 0, 1, 1.01) 1 forwards zoom-in");
+
+        if(imgs[currImgInd].hasAttribute("hidden")){
+            imgs[currImgInd].removeAttribute("hidden");
+        }
+
+        imgs[currImgInd].setAttribute("style", "animation: 6s linear 1 forwards zoom-in");
         currImgInd++;
-    }, 8000);
+    }, 7000);
 
 }
 
