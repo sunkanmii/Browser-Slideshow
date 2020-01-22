@@ -54,17 +54,21 @@ function exitHandler() {
     let imgsLength = imgs.length;
     let currImgInd = myCounter.CusCounter();
     
-    imgs[currImgInd].setAttribute("style", "animation: 6s linear 1 forwards zoom-in");
+    if(checkAudio() === true){
+        audioTag.play();
+    }
+
+    imgs[currImgInd].setAttribute("style", "animation: 7s linear 1 forwards zoom-in");
     currImgInd++;
 
     let slideShowInterval = setInterval(function () {
-        if (document.fullscreenElement) {
-            if(checkAudio() === true){
-                audioTag.play();
-            }
-        } else {
+        if (document.fullscreenElement === null) {
             imgs[currImgInd - 1].removeAttribute("style");
             clearInterval(slideShowInterval);
+
+            if(checkAudio() === true){
+                audioTag.pause();
+            }
             return; // Force setInterval to stop
         }
         
@@ -83,9 +87,9 @@ function exitHandler() {
             imgs[currImgInd].removeAttribute("hidden");
         }
 
-        imgs[currImgInd].setAttribute("style", "animation: 6s linear 1 forwards zoom-in");
+        imgs[currImgInd].setAttribute("style", "animation: 7s linear 1 forwards zoom-in");
         currImgInd++;
-    }, 7000);
+    }, 8000);
 
 }
 
@@ -245,6 +249,8 @@ addAudio.addEventListener("click", () => {
 });
 
 function AddAudioFile(audioFile) {
+    audioTag.removeAttribute("hidden");
+
     let userAudioFile = audioFile[0];
 
     let reader = new FileReader();
