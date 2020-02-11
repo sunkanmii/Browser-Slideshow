@@ -5,7 +5,7 @@
     <meta name="X-UA-Compatible" , http-equiv="IE-Edge" />
     <meta name="viewport" , content="width=device-width initial-scale=1.0" />
     <meta name="msapplication-tap-highlight" , content="none" />
-    <link rel="manifest" href="\manifest.json">
+    <link rel="manifest" href="../manifest.json">
 
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -23,25 +23,25 @@
     <link rel="apple-touch-icon" sizes="256x256" href="">
     <link rel="icon" sizes="384x384" href="">
     <link rel="apple-touch-icon" sizes="384x384" href="">
-    <link rel="icon" sizes="512x512" href="\imgs\slideshow.png">
-    <link rel="apple-touch-icon" sizes="512x512" href="\imgs\slideshow.png">
+    <link rel="icon" sizes="512x512" href="../imgs/slideshow.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="../imgs/slideshow.png">
     <title>Slide show</title>
-<!--     
+    <!--     
     <link rel="preload" as="font" crossorigin="crossorigin" type="font/woff2" href="custom.woff2"/> 
 -->
     <link rel="preload" as="style" onload="this.rel='stylesheet'" media="screen" href="main.css" />
     <noscript>
-        <link rel="stylesheet" media="screen" type="text/css" href="main.css"/>
+        <link rel="stylesheet" media="screen" type="text/css" href="main.css" />
     </noscript>
 </head>
 
 <body>
     <header>
         <input type="file" id="fileElem" multiple accept="image/*" style="display:none"
-            onchange="AddImgFiles(this.files)"/>
+            onchange="AddImgFiles(this.files)" />
         <button id="add-pics">Add images</button>
         <input type="file" id="audioFileElem" accept="audio/*" style="display: none"
-        onchange="AddAudioFile(this.files)"/>
+            onchange="AddAudioFile(this.files)" />
         <button id="add-audio">Add song</button>
     </header>
 
@@ -56,14 +56,13 @@
                         Check mobile browser developer tools for more info with and without type 
                         attribute.
                     -->
-                    <source src="/videos/ice_video_20200122-025041_edit_0.webm" type="video/webm" />
+                    <source src="../videos/ice_video_20200122-025041_edit_0.webm" type="video/webm" />
 
                     <!-- <track src="/chrome-subtitles-en.vtt" label="English captions" kind="captions" srclang="en"
                         default /> -->
 
                     <p>Browser does not support video.</p>
                 </video>
-
                 <section class="cus-video-controls">
                     <button onclick="ToggleFullScreen()" id="cinematic-mode">Cinematic mode</button>
                 </section>
@@ -78,7 +77,7 @@
                     <img style="display: none" id="next-image" srcset="/imgs/Image106.jpg 1600w, /imgs/Image103.jpg 1000w, /imgs/Image104.jpg 800w, /imgs/Image107.jpg 500w" sizes="50vw" alt="second slideshow image"/>
                 -->
                 <section class="slide-show-imgs">
-                    <img class="user-images" src="/imgs/Image107.jpg" sizes="50vw" alt="flower" />
+                    <img class="user-images" src="../imgs/Image107.jpg" sizes="50vw" alt="flower" />
                 </section>
 
                 <section id="next-button">
@@ -94,8 +93,8 @@
             Your browser does not support <code>audio</code> element.
         </audio>
         <!--        
-        <section id="audio-popup" hidden>
-            <section>
+            <section id="audio-popup" hidden>
+                <section>
             <p>Do you want to add audio before starting slideshow?</p>
             <button id="accept">Yes</button> or <button id="reject">No</button>
             </section>
@@ -122,5 +121,4 @@
 
     <script src="main.js" type="text/javascript" async></script>
 </body>
-
 </html>
